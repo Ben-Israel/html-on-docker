@@ -29,6 +29,7 @@ kind: Service
 metadata:
   name: html-on-docker-svc
 spec:
+  type: NodePort
   selector:
     app: html-on-docker
   ports:
