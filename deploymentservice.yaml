@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-on-docker-k8
+  labels:
+    app: html-on-docker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: html-on-docker
+  template:
+    metadata:
+      labels:
+        app: html-on-docker
+    spec:
+      containers:
+      - name: html-on-docker
+        image: benisrael/html-on-docker
+        ports:
+        - containerPort: 8080
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: html-on-docker-svc
+spec:
+  selector:
+    app: html-on-docker
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
